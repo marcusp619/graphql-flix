@@ -19,8 +19,8 @@ const books = [
 const typeDefs = gql`
   # Comments in GraphQL are defined with the hash (#) symbol.
 
-  # This "MovieType" 
-  type Book {
+  # "MovieType" 
+  type Movie {
     poster_path: String
     adult: Boolean
     overview: String
@@ -33,7 +33,19 @@ const typeDefs = gql`
     backdrop_path: String
     popularity: Float
     vote_count: Float
-    videos: [VideoType]
+    videos: [Video]
+  }
+
+  # "VideoType"
+  type Video {
+    id: ID
+    iso_639_1: String
+    iso_3166_1: String
+    key: String
+    name: String
+    site: String
+    size: Int
+    type: String
   }
 
   # The "Query" type is the root of all GraphQL queries.
