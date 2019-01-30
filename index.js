@@ -1,4 +1,6 @@
-const { ApolloServer, gql } = require('apollo-server');
+const { ApolloServer, gql } = require("apollo-server");
+const fetch = require("node-fetch");
+require("dotenv/config");
 
 // This is a (sample) collection of books we'll be able to query
 // the GraphQL server for.  A more complete example might fetch
@@ -42,7 +44,7 @@ const typeDefs = gql`
   type TV {
     poster_path: String
     popularity: Float
-    id: { type: GraphQLID },
+    id: ID
     backdrop_path: String
     vote_average: Float
     overview: String
@@ -60,6 +62,7 @@ const typeDefs = gql`
   type Query {
     movies: [Movie]
     tv: [TV]
+    videos: [Video]
   }
 `;
 
@@ -67,9 +70,29 @@ const typeDefs = gql`
 // schema.  We'll retrieve books from the "books" array above.
 const resolvers = {
   Query: {
-    movies: () => movies,
-    shows: () => tv,
+    async movies() {
+      try {
+        const response = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.API_KEY}&language=en-US&page=1`)
+        const movies = await response.json();
+
+        return movies.results
+      } catch (error) {
+        console.error(error);
+      }
+    },
   },
+  Movie: {
+    async videos(parent) {
+      try {
+        const response = await fetch(`https://api.themoviedb.org/3/movie/${parent.id}/videos?api_key=${process.env.API_KEY}&language=en-US`)
+        const videos = await response.json();
+
+        return videos.results
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  }
 };
 
 // In the most basic sense, the ApolloServer can be started
