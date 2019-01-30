@@ -48,6 +48,22 @@ const typeDefs = gql`
     type: String
   }
 
+  type TV {
+    poster_path: String
+    popularity: Float
+    id: { type: GraphQLID },
+    backdrop_path: String
+    vote_average: Float
+    overview: String
+    first_air_date: String
+    origin_country: [String]
+    genre_ids: [Int]
+    original_language: String
+    vote_count: Int
+    name: String
+    original_name: String
+  }
+
   # The "Query" type is the root of all GraphQL queries.
   # (A "Mutation" type will be covered later on.)
   type Query {
