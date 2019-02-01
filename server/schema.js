@@ -5,13 +5,13 @@ const typeDefs = gql`
     me: User
     movies: [Movie]!
     tv: [TV]
-    videos: [Videos]
+    videos: [Video]
   }
 
   type Mutation {
     login(email: String): String
 
-    AddMovies(movieIds: [ID]!) MovieUpdateResponse!
+    addMovies(movieIds: [ID]!): MovieUpdateResponse!
   }
 
   type MovieUpdateResponse {
