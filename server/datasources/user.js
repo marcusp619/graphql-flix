@@ -60,7 +60,7 @@ class UserAPI extends DataSource {
       return !!this.store.movies.destroy({ where: { userId, movieId } });
     }
   
-    async getmovieIdsByUser() {
+    async getMovieIdsByUser() {
       const userId = this.context.user.id;
       const found = await this.store.movies.findAll({
         where: { userId },

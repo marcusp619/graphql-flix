@@ -14,11 +14,11 @@ class movieAPI extends RESTDataSource {
       : [];
   }
 
-  // async getVideoById (videoId) {
-  //   const response = await this.get(`${videoId}/videos?api_key=${process.env.API_KEY}&language=en-US`);
-  //   console.log(response)
-  //   return this.movieReducer(response.results);
-  // }
+  async getMovieById (movieId) {
+    console.log(movieId)
+    const response = await this.get(`${movieId}?api_key=${process.env.API_KEY}&language=en-US`);
+    return this.movieReducer(response);
+  }
 
   async getVideosById (videoId) {
     const response = await this.get(`${videoId}/videos?api_key=${process.env.API_KEY}&language=en-US`);
