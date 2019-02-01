@@ -15,9 +15,15 @@ class movieAPI extends RESTDataSource {
   }
 
   async getMovieById (movieId) {
-    console.log(movieId)
     const response = await this.get(`${movieId}?api_key=${process.env.API_KEY}&language=en-US`);
+  
     return this.movieReducer(response);
+  }
+
+  async getMoviesById ({ movieIds }) {
+    return Promise.all(
+      movieIds.map(movieId => this.getMovieById(movieId))
+    );
   }
 
   async getVideosById (videoId) {
@@ -26,7 +32,6 @@ class movieAPI extends RESTDataSource {
   }
 
   movieReducer(movie) {
-    console.log(Object.keys(movie))
     return {
       poster_path: movie.poster_path,
       adult: movie.adult,

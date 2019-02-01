@@ -25,6 +25,7 @@ class UserAPI extends DataSource {
     async findOrCreateUser({ email: emailArg } = {}) {
       const email =
         this.context && this.context.user ? this.context.user.email : emailArg;
+        console.log(email);
       if (!email || !isEmail.validate(email)) return null;
   
       const users = await this.store.users.findOrCreate({ where: { email } });
@@ -40,14 +41,14 @@ class UserAPI extends DataSource {
       // for each movie id, try to add the movie and add it to the results array
       // if successful
       for (const movieId of movieIds) {
-        const res = await this.addMovie({ movieId });
+        const res = await this.addMovie(movieId);
         if (res) results.push(res);
       }
   
       return results;
     }
   
-    async addMovie({ movieId }) {
+    async addMovie(movieId) {
       const userId = this.context.user.id;
       const res = await this.store.movies.findOrCreate({
         where: { userId, movieId },
