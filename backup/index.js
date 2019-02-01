@@ -53,12 +53,29 @@ const typeDefs = gql`
     original_name: String
   }
 
+  #"UserType"
+  type User {
+    id: ID!
+    email: String!
+    movies: [Movie]
+  }
+
   # The "Query" type is the root of all GraphQL queries.
-  # (A "Mutation" type will be covered later on.)
   type Query {
     movies: [Movie]
     tv: [TV]
     videos: [Video]
+    me: User
+  }
+
+  # The "Mutation" type is the root of all GraphQL creations, deletions and updates
+  type Mutation {
+    login(email: String): LoginResponse!
+  }
+
+  type LoginResponse {
+    sucess: Boolean!
+    message: String
   }
 `;
 
@@ -88,6 +105,9 @@ const resolvers = {
         console.error(error);
       }
     }
+  },
+  Mutation: {
+    async addUser(_, {})
   }
 };
 

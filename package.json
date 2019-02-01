@@ -4,15 +4,29 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "apollo-datasource": "^0.2.2",
+    "apollo-datasource-rest": "^0.2.2",
     "apollo-server": "^2.3.3",
+    "apollo-server-testing": "^2.3.3",
     "dotenv": "^6.2.0",
     "graphql": "^14.1.1",
+    "isemail": "^3.2.0",
+    "nodemon": "^1.18.9",
+    "sequelize": "^4.42.0",
+    "sqlite3": "^4.0.6"
+  },
+  "devDependencies": {
+    "apollo-link": "^1.2.6",
+    "apollo-link-http": "^1.5.9",
+    "jest": "^24.0.0",
+    "nock": "^10.0.6",
     "node-fetch": "^2.3.0"
   }
 }
