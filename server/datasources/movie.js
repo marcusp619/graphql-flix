@@ -1,4 +1,5 @@
 const { RESTDataSource } = require('apollo-datasource-rest');
+require('dotenv').config()
 
 class movieAPI extends RESTDataSource {
   constructor() {
@@ -7,15 +8,16 @@ class movieAPI extends RESTDataSource {
   }
 
   async getPopularMovies() {
-      const response = await this.get('popular?api_key=${process.env.API_KEY}&language=en-US&page=1');
-      return Array.isArray(response)
-      ? response.map(movie => this.movieReducer(movie))
+      const response = await this.get(`popular?api_key=${process.env.API_KEY}&language=en-US&page=1`);
+      return typeof response === "object"
+      ? response.results.map(movie => this.movieReducer(movie))
       : [];
   }
 
   async getVideoById ({ videoId }) {
-    const response = await this.get(`${videoId}/videos?api_key=${process.env.API_KEY}&language=en-US`);
-    return this.movieReducer(response[0]);
+    console.log(videoId)
+    // const response = await this.get(`${videoId}/videos?api_key=${process.env.API_KEY}&language=en-US`);
+    // return this.movieReducer(response[0]);
   }
 
   async getVideosById ({ videosIds }) {
@@ -30,7 +32,7 @@ class movieAPI extends RESTDataSource {
         adult: movie.adult,
         overview: movie.overview,
         release_date: movie.release_date,
-        genre_ids: [movie.genre_ids],
+        genre_ids: movie.genre_ids,
         id: movie.id,
         original_title: movie.original_title,
         original_language: movie.original_language,
