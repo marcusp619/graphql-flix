@@ -1,6 +1,6 @@
 const { RESTDataSource } = require('apollo-datasource-rest');
 
-class LaunchAPI extends RESTDataSource {
+class movieAPI extends RESTDataSource {
   constructor() {
     super();
     this.baseURL = 'https://api.themoviedb.org/3/movie/';
@@ -13,6 +13,16 @@ class LaunchAPI extends RESTDataSource {
       : [];
   }
 
+  async getVideoById ({ videoId }) {
+    const response = await this.get(`${videoId}/videos?api_key=${process.env.API_KEY}&language=en-US`);
+    return this.movieReducer(response[0]);
+  }
+
+  async getVideosById ({ videosIds }) {
+    return Promise.all(
+      videosIds.map(videoId => this.getVideosById({ videoId })),
+    );
+  }
 
   movieReducer(movie) {
       return {
@@ -42,4 +52,4 @@ class LaunchAPI extends RESTDataSource {
   }
 }
 
-module.exports = LaunchAPI;
+module.exports = movieAPI;
