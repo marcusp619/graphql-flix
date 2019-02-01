@@ -15,7 +15,7 @@ module.exports = {
       addMovies: async (_, { movieIds }, { dataSources }) => {
         const results = await dataSources.userAPI.addMovies({ movieIds });
         const movies = await dataSources.movieAPI.getMoviesById({ movieIds });
-        console.log(`results:: ${results}`)
+        
         return {
           success: results && results.length === movieIds.length,
           message: results.length === movieIds.length 
@@ -36,7 +36,7 @@ module.exports = {
       //   const movie = await dataSources.movieAPI.getMovieById({ movieId });
       //   return {
       //     success: true,
-      //     message: 'movie deleted',
+      //     message: 'movie successfully deleted',
       //     movies: [movie],
       //   };
       // },
