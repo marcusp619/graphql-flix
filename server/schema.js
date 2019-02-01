@@ -34,7 +34,7 @@ const typeDefs = gql`
     backdrop_path: String
     popularity: Float
     vote_count: Float
-    videos: Video
+    videos: [Video]
   }
 
   # "VideoType"

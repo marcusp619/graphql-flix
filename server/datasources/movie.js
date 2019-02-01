@@ -14,43 +14,34 @@ class movieAPI extends RESTDataSource {
       : [];
   }
 
-  async getVideoById ({ videoId }) {
-    console.log(videoId)
-    // const response = await this.get(`${videoId}/videos?api_key=${process.env.API_KEY}&language=en-US`);
-    // return this.movieReducer(response[0]);
-  }
+  // async getVideoById (videoId) {
+  //   const response = await this.get(`${videoId}/videos?api_key=${process.env.API_KEY}&language=en-US`);
+  //   console.log(response)
+  //   return this.movieReducer(response.results);
+  // }
 
-  async getVideosById ({ videosIds }) {
-    return Promise.all(
-      videosIds.map(videoId => this.getVideosById({ videoId })),
-    );
+  async getVideosById (videoId) {
+    const response = await this.get(`${videoId}/videos?api_key=${process.env.API_KEY}&language=en-US`);
+    return response.results.map(video => this.videoReducer(video))
   }
 
   movieReducer(movie) {
-      return {
-        poster_path: movie.poster_path,
-        adult: movie.adult,
-        overview: movie.overview,
-        release_date: movie.release_date,
-        genre_ids: movie.genre_ids,
-        id: movie.id,
-        original_title: movie.original_title,
-        original_language: movie.original_language,
-        title: movie.title,
-        backdrop_path: movie.backdrop_path,
-        popularity: movie.popularity,
-        vote_count: movie.vote_count,
-        videos: {
-          id: movie.video.id,
-          iso_639_1: movie.video.iso_639_1,
-          iso_3166_1: movie.video.iso_3166_1,
-          key: movie.video.key,
-          name: movie.video.name,
-          site: movie.video.site,
-          size: movie.video.size,
-          type: movie.video.type,  
-        }
-      }
+    console.log(Object.keys(movie))
+    return {
+      poster_path: movie.poster_path,
+      adult: movie.adult,
+      overview: movie.overview,
+      release_date: movie.release_date,
+      genre_ids: movie.genre_ids,
+      id: movie.id,
+      original_title: movie.original_title,
+      original_language: movie.original_language,
+      title: movie.title,
+      backdrop_path: movie.backdrop_path,
+      popularity: movie.popularity,
+      vote_count: movie.vote_count,
+      videos: movie.videos
+    }
   }
 }
 
