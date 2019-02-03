@@ -13,6 +13,8 @@ const typeDefs = gql`
     login(email: String): String
 
     addMovies(movieIds: [ID]!): MovieUpdateResponse!
+
+    deleteMovie(movieIds: [ID]!): MovieUpdateResponse!
   }
 
   type MovieUpdateResponse {
