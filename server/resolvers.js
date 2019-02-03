@@ -24,8 +24,9 @@ module.exports = {
         movies,
       }
     },
-    deleteMovie: async (_, { movieId }, { dataSources }) => {
-      const result = dataSources.userAPI.deleteMovie({ movieId });
+    deleteMovie: async (_, { movieIds }, { dataSources }) => {
+      const movieId = movieIds;
+      const result = dataSources.userAPI.deleteMovies({ movieId });
 
       if (!result)
         return {
@@ -33,11 +34,11 @@ module.exports = {
           message: 'failed to delete movie',
         };
 
-      const movie = await dataSources.movieAPI.getMovieById({ movieId });
+      const movies = await dataSources.movieAPI.getMoviesById({ movieIds });
       return {
         success: true,
         message: 'movie successfully deleted',
-        movies: [movie],
+        movies: [...movies],
       };
     },
   },
