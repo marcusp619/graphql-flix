@@ -1,0 +1,25 @@
+{
+  "name": "graphql-server-flix",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "nodemon ./index.js",
+    "start:ci": "node ./index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.3.3",
+    "apollo-server-testing": "^2.3.3",
+    "dotenv": "^6.2.0",
+    "graphql": "^14.1.1",
+    "isemail": "^3.2.0",
+    "nodemon": "^1.18.9"
+  },
+  "devDependencies": {
+    "node-fetch": "^2.3.0"
+  }
+}

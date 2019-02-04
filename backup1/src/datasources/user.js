@@ -56,6 +56,7 @@ class UserAPI extends DataSource {
   
     async deleteMovies({ movieId }) {
       const userId = this.context.user.id;
+      
       return !!this.store.movies.destroy({ where: { userId, movieId } });
     }
   

@@ -1,61 +1,61 @@
-module.exports = {
-  Query: {
-    movies: async (_, __, { dataSources }) =>
-      dataSources.movieAPI.getPopularMovies(),
-    movie: async (_, { id }, { dataSources }) =>
-      dataSources.movieAPI.getMovieById(id),
-    me: async (_, __, { dataSources }) =>
-      dataSources.userAPI.findOrCreateUser(),
-  },
-  Mutation: {
-    login: async (_, { email }, { dataSources }) => {
-      const user = await dataSources.userAPI.findOrCreateUser({ email });
-      if (user) return Buffer.from(email).toString('base64');
-    },
-    addMovies: async (_, { movieIds }, { dataSources }) => {
-      const results = await dataSources.userAPI.addMovies({ movieIds });
-      const movies = await dataSources.movieAPI.getMoviesById({ movieIds });
+const fetch = require("node-fetch");
+require("dotenv/config");
 
-      return {
-        success: results && results.length === movieIds.length,
-        message: results.length === movieIds.length
-          ? 'movies added successfully'
-          : `the following movies couldn't be added: ${movieIds.filter(id => !results.includes(id))}`,
-        movies,
+module.exports = { 
+  Query: {
+    movies: async () => {
+      try {
+        const response = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.API_KEY}&language=en-US&page=1`);
+        const movies = await response.json();
+
+        return movies.results
+      } catch (error) {
+        console.error(error);
       }
     },
-    deleteMovie: async (_, { movieIds }, { dataSources }) => {
-      const movieId = movieIds;
-      const result = dataSources.userAPI.deleteMovies({ movieId });
-
-      if (!result)
-        return {
-          success: false,
-          message: 'failed to delete movie',
-        };
-
-      const movies = await dataSources.movieAPI.getMoviesById({ movieIds });
-      return {
-        success: true,
-        message: 'movie successfully deleted',
-        movies: [...movies],
-      };
+    movie: async (_, { movieId }) => {
+      try {
+        const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.API_KEY}&language=en-US`);
+        const movie = await response.json();
+  
+        return movie;
+      } catch (error) {
+        console.error(error);
+      }
     },
+    tv: async () => {
+      try {
+        const response = await fetch(`https://api.themoviedb.org/3/tv/popular?api_key=${process.env.API_KEY}&language=en-US&page=1`);
+        const tv = await response.json();
+
+        return tv.results;
+      } catch (error) {
+        console.error(error);
+      }
+    }
   },
   Movie: {
-    videos: async (parent, __, { dataSources }) =>
-      dataSources.videoAPI.getVideosById(parent.id),
-  },
-  User: {
-    movies: async (_, __, { dataSources }) => {
-      const movieIds = await dataSources.userAPI.getMovieIdsByUser();
-      if (!movieIds.length) return [];
+    videos: async (parent) => {
+      try {
+        const response = await fetch(`https://api.themoviedb.org/3/movie/${parent.id}/videos?api_key=${process.env.API_KEY}&language=en-US`);
+        const videos = await response.json();
 
-      return (
-        dataSources.movieAPI.getMovieById({
-          movieIds,
-        }) || []
-      );
+        return videos.results;
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  },
+  TV: {
+    videos: async (parent) => {
+      try {
+        const response = await fetch(`https://api.themoviedb.org/3/tv/${parent.id}/videos?api_key=${process.env.API_KEY}&language=en-US`);
+        const videos = await response.json();
+
+        return videos.results;
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 }
