@@ -8,7 +8,7 @@ import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
 
 const client = new ApolloClient({
-  uri: "http://localhost:4000/"
+  uri: "https://server-bn0xzhztw.now.sh"
 })
 
 client
