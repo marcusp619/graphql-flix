@@ -6,6 +6,7 @@ const MoiveCard = props => (
     <MovieImg
       src={`https://image.tmdb.org/t/p/w300/${props.movie.poster_path}`}
     />
+    <MovieTitle>{props.movie.title}</MovieTitle>
   </MovieCardContainer>
 );
 
@@ -24,6 +25,12 @@ const MovieImg = styled.img`
   width: 250px;
   height: 140.45px;
   object-fit: cover;
+`;
+
+const MovieTitle = styled.h4`
+  position: absolute;
+  bottom: 0;
+  padding: 0 10px;
 `;
 
 export default MoiveCard;
