@@ -1,12 +1,11 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 const BackGroundVideo = (props) => {
   return (
-    <div>
+    <BackgroundVideo>
       background video
-    </div>
+    </BackgroundVideo>
   )
 };
 

@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "nodemon ./index.js",
-    "start:ci": "node ./index.js"
+    "start": "nodemon ./src/index.js",
+    "start:ci": "node ./src/index.js"
   },
   "keywords": [],
   "author": "",
