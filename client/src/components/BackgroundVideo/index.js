@@ -7,6 +7,7 @@ const GET_A_MOVIE = gql`
   query GetAMovie {
     movie(movieId: 450465) {
       backdrop_path
+      poster_path
       title
       adult
       overview
@@ -52,7 +53,8 @@ const BackgroundVideoContainer = styled.div`
 `;
 
 const BackgroundVideoImg = styled.img`
-  height: auto;
+  object-fit: cover;
+  height: 665px;
   width: 100%;
   left: 0;
   right: 0;
