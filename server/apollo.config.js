@@ -1,6 +1,5 @@
 module.exports = {
   client : {
-    name: 'Flix Tracker [web]',
-    service: 'flix-tracker'
+    name: 'marcusp619-7242'
   }
 }
