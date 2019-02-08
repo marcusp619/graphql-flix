@@ -9,6 +9,7 @@ const GET_MOVIES = gql`
     movies {
       title
       poster_path
+      genres
     }
   }
 `;

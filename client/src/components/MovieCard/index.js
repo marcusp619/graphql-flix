@@ -7,6 +7,7 @@ const MoiveCard = props => (
       src={`https://image.tmdb.org/t/p/w300/${props.movie.poster_path}`}
     />
     <MovieTitle>{props.movie.title}</MovieTitle>
+    <MovieGenres>{props.movie.genres}</MovieGenres>
   </MovieCardContainer>
 );
 
@@ -19,6 +20,7 @@ const MovieCardContainer = styled.div`
   cursor: pointer;
   trasition: 450ms all;
   transform-origin: center left;
+  color: white;
 `;
 
 const MovieImg = styled.img`
@@ -27,10 +29,16 @@ const MovieImg = styled.img`
   object-fit: cover;
 `;
 
+const MovieGenres = styled.h5`
+  position: absolute;
+  bottom: 10px;
+  left: 5px;
+`
+
 const MovieTitle = styled.h4`
   position: absolute;
-  bottom: 0;
-  padding: 0 10px;
+  bottom: 25px;
+  left: 5px;
 `;
 
 

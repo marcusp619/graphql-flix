@@ -11,9 +11,6 @@ const GET_A_MOVIE = gql`
       title
       adult
       overview
-      genres {
-        name
-      }
       videos {
         id
         key
