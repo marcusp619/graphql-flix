@@ -11,6 +11,9 @@ const GET_A_MOVIE = gql`
       title
       adult
       overview
+      genres {
+        name
+      }
       videos {
         id
         key
@@ -25,6 +28,7 @@ const BackGroundVideo = () => {
   return (
     <Query query={GET_A_MOVIE}>
       {({ data, loading, error }) => {
+        console.log(data.movie)
         if (loading) return <div>Loading...</div>;
         if (error) return <p>ERROR</p>;
         console.log(data);

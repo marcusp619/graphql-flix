@@ -17,11 +17,6 @@ const typeDefs = gql`
     login(email: String): LoginResponse!
   }
 
-  type Genres {
-    id: ID
-    name: String
-  }
-
   # "MovieType"
   type Movie {
     poster_path: String
@@ -29,7 +24,7 @@ const typeDefs = gql`
     overview: String
     release_date: String
     genre_ids: [String]
-    genres: [Genres]
+    genres: String
     id: ID
     original_title: String
     original_language: String
