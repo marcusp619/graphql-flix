@@ -43,4 +43,5 @@ const MovieCardsContainer = styled.div`
   align-items: center;
   overflow: scroll;
   width: 100%;
+  margin-top: 20px;
 `;

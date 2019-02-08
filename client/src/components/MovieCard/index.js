@@ -33,4 +33,6 @@ const MovieTitle = styled.h4`
   padding: 0 10px;
 `;
 
+
+
 export default MoiveCard;
