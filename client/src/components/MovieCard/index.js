@@ -25,14 +25,9 @@ const MovieCardContainer = styled.div`
   margin-right: 10px;
   cursor: pointer;
   transition: all 0.45s;
-  transform-origin: center left;
   color: white;
-  
-  &:hover {
-    transform: scale(1.5);
-  }
 
-  &:hover ${MovieDetailsContainer}{
+  &:hover ${MovieDetailsContainer} {
     opacity: 1
     transition: all 0.45s;
   }
