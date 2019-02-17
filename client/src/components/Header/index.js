@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import styled from 'styled-components';
-import {Link} from 'react-router-dom';
-import SearchIcon from './SearchIcon.svg';
-import BellIcon from './BellIcon.svg';
-import FaceIcon from './FaceIcon.svg';
-import CaretDownIcon from './CaretDownIcon.svg';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import SearchIcon from "./SearchIcon.svg";
+import BellIcon from "./BellIcon.svg";
+import FaceIcon from "./FaceIcon.svg";
+import CaretDownIcon from "./CaretDownIcon.svg";
 
 const Header = () => {
   const [isOpen, setOpen] = useState(false);
@@ -51,12 +51,13 @@ const Header = () => {
           </Li>
           <Li>
             <StyledLink
-              flex={'flex'}
-              align={'center'}
+              flex={"flex"}
+              align={"center"}
               onMouseEnter={() => setOpen(true)}
-              to="/">
+              to="/"
+            >
               <Icon src={FaceIcon} />
-              <Icon size={'10px'} src={CaretDownIcon} />
+              <Icon size={"10px"} src={CaretDownIcon} />
             </StyledLink>
             {isOpen && (
               <UlDropDown>
@@ -75,13 +76,18 @@ const Header = () => {
 };
 
 const HeaderContainer = styled.header`
+  position: fixed;
+  top: 0;
   display: flex;
+  height: 70px;
+  width: 100%
   align-items: center;
   justify-content: space-around;
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0));
+  background: rgb(20, 20, 20);
+  z-index: 1;
 `;
 const Icon = styled.img`
-  width: ${props => props.size || '20px'};
+  width: ${props => props.size || "20px"};
 `;
 const Nav = styled.nav`
   margin-right: ${props => props.marginContent};
@@ -102,6 +108,7 @@ const HeaderLogo = styled.h2`
   display: inline;
   border-top: 2px solid #b9090b;
   border-bottom: 2px solid #b9090b;
+  color: white;
 `;
 const Li = styled.li`
   padding-right: 15px;

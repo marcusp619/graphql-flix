@@ -1,23 +1,62 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { Fragment } from 'react';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
 import styled from 'styled-components';
 
-const BackGroundVideo = (props) => {
+const GET_A_MOVIE = gql`
+  query GetAMovie {
+    movie(movieId: 450465) {
+      backdrop_path
+      poster_path
+      title
+      adult
+      overview
+      videos {
+        id
+        key
+        name
+        type
+      }
+    }
+  }
+`;
+
+const BackGroundVideo = () => {
   return (
-    <div>
-      background video
-    </div>
-  )
+    <Query query={GET_A_MOVIE}>
+      {({ data, loading, error }) => {
+        if (loading) return <div>Loading...</div>;
+        if (error) return <p>ERROR</p>;
+        return (
+          <BackgroundVideoContainer>
+            <Fragment>
+              {data.movie && data.movie && (
+                <BackgroundVideoImg
+                  src={`https://image.tmdb.org/t/p/w500/${
+                    data.movie.backdrop_path
+                  }`}
+                />
+              )}
+            </Fragment>
+          </BackgroundVideoContainer>
+        );
+      }}
+    </Query>
+  );
 };
 
-const BackgroundVideo = styled.div`
-  position: absolute;
-  top: -2px;
-  left: 0;
-  min-width: 100%;
-  height: 90vh;
+const BackgroundVideoContainer = styled.div`
+  position: relative;
+  height: 665px;
   width: auto;
-  z-index: -100;
+`;
+
+const BackgroundVideoImg = styled.img`
+  object-fit: cover;
+  height: 665px;
+  width: 100%;
+  left: 0;
+  right: 0;
 `;
 
 export default BackGroundVideo;

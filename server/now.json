@@ -1,4 +1,11 @@
 {
   "version": 2,
-  "builds": [{ "src": "src/index.js", "use": "@now/node" }]
+  "name": "flix-api",
+  "builds": [
+    {"src": "./src/index.js", "use": "@now/node"}
+  ],
+  "env": {
+    "ENGINE_API_KEY": "service:marcusp619-7242:AO5UZhD-RTbu24Rv_xY0YQ",
+    "API_KEY": "5cb4969ffac5d2d967beb6c31aa53509"
+  }
 }
