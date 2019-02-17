@@ -14,7 +14,7 @@ const MoiveCard = props => (
 );
 
 const MovieDetailsContainer = styled.div`
-  opacity: 1;
+  opacity: 0;
 `;
 
 const MovieCardContainer = styled.div`
