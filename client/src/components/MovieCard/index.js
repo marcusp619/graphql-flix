@@ -2,10 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const MoiveCard = props => (
-  <MovieCardContainer>
-    <MovieImg
-      src={`https://image.tmdb.org/t/p/w300/${props.movie.poster_path}`}
-    />
+  <MovieCardContainer posterPath={props.movie.poster_path}>
     <MovieDetailsContainer>
       <MovieTitle>{props.movie.title}</MovieTitle>
       <MovieGenres>{props.movie.genres}</MovieGenres>
@@ -15,30 +12,32 @@ const MoiveCard = props => (
 
 const MovieDetailsContainer = styled.div`
   opacity: 0;
+  width: 300px;
 `;
 
 const MovieCardContainer = styled.div`
   position: relative;
   display: inline-block;
-  width: 250px;
+  width: 300px;
   height: 140.45px;
   margin-right: 10px;
   cursor: pointer;
   transition: all 0.45s;
   color: white;
+  background: url(https://image.tmdb.org/t/p/w300/${props =>
+    props.posterPath}) no-repeat center center;
+  background-size: cover;
 
   &:hover ${MovieDetailsContainer} {
     opacity: 1
     transition: all 0.45s;
   }
-`;
 
-const MovieImg = styled.img`
-  width: 250px;
-  height: 140.45px;
-  object-fit: cover;
+  &:hover {
+    opacity: 0.7;
+    transition: all 0.45s;
+  }
 `;
-
 const MovieGenres = styled.h6`
   position: absolute;
   bottom: 10px;

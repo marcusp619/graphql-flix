@@ -1,7 +1,7 @@
-import React, { Fragment } from "react";
-import { Query } from "react-apollo";
-import gql from "graphql-tag";
-import styled from "styled-components";
+import React, { Fragment } from 'react';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
+import styled from 'styled-components';
 
 const GET_A_MOVIE = gql`
   query GetAMovie {
@@ -25,10 +25,8 @@ const BackGroundVideo = () => {
   return (
     <Query query={GET_A_MOVIE}>
       {({ data, loading, error }) => {
-        console.log(data.movie);
         if (loading) return <div>Loading...</div>;
         if (error) return <p>ERROR</p>;
-        console.log(data);
         return (
           <BackgroundVideoContainer>
             <Fragment>
