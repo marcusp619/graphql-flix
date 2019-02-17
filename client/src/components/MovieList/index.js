@@ -44,14 +44,15 @@ const MovieCardsContainer = styled.div`
   overflow: scroll;
   width: 100%;
   margin-top: 20px;
-`;
-
-const MovieData = styled(Fragment)`
+  padding-bottom: 60px;
   transition: 0.45s transform;
-  padding-bottom: 10px;
-  white-space: nowrap;
 
   &:hover {
     transform: translate3d((250px * (1.5 -1) / 2));
   }
+`;
+
+const MovieData = styled(Fragment)`
+  padding-bottom: 20px;
+  white-space: nowrap;
 `;

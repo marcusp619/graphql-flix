@@ -14,7 +14,7 @@ const MoiveCard = props => (
 );
 
 const MovieDetailsContainer = styled.div`
-  opacity: 0;
+  opacity: 1;
 `;
 
 const MovieCardContainer = styled.div`
@@ -44,7 +44,7 @@ const MovieImg = styled.img`
   object-fit: cover;
 `;
 
-const MovieGenres = styled.h5`
+const MovieGenres = styled.h6`
   position: absolute;
   bottom: 10px;
   left: 5px;
