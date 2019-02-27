@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
+import MovieCardDetails from '../MovieCardDetails';
 import styled from 'styled-components';
 
-const MoiveCard = props => (
-  <MovieCardContainer posterPath={props.movie.poster_path}>
-    <MovieDetailsContainer>
-      <MovieTitle>{props.movie.title}</MovieTitle>
-      <MovieGenres>{props.movie.genres}</MovieGenres>
-    </MovieDetailsContainer>
-  </MovieCardContainer>
-);
+const MoiveCard = props => {
+  const [open, isopen] = useState(false);
+
+  return (
+    <MovieCardContainer
+      onClick={() => isopen(!open)}
+      posterPath={props.movie.poster_path}
+    >
+      <MovieDetailsContainer>
+        <MovieTitle>{props.movie.title}</MovieTitle>
+        <MovieGenres>{props.movie.genres}</MovieGenres>
+      </MovieDetailsContainer>
+      {open && <MovieCardDetails />}
+    </MovieCardContainer>
+  );
+};
 
 const MovieDetailsContainer = styled.div`
   opacity: 0;
