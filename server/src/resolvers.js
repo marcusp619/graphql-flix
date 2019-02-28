@@ -47,6 +47,15 @@ module.exports = {
       } catch (error) {
         console.error(error);
       }
+    },
+    users: async () => {
+      try {
+        const users = await database('users').select();
+        console.log(users);
+        return users;
+      } catch (error) {
+        console.error(error);
+      }
     }
   },
   Movie: {
