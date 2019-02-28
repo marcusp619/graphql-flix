@@ -10,7 +10,7 @@ const typeDefs = gql`
     tv: [TV]
     videos: [Video]
     users: [User]
-    me(userId: ID!): [User]
+    me(userId: ID!): User
   }
 
   # The "Mutation" type is the root of all GraphQL creations, deletions and updates
