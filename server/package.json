@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "node ./src/index.js",
+    "start": "nodemon ./src/index.js",
     "start:ci": "node ./src/index.js"
   },
   "keywords": [],
@@ -13,11 +13,15 @@
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^2.4.0",
+    "apollo-server-express": "^2.4.8",
     "apollo-server-testing": "^2.4.0",
     "dotenv": "^6.2.0",
     "graphql": "^14.1.1",
+    "graphql-tools": "^4.0.4",
     "isemail": "^3.2.0",
-    "nodemon": "^1.18.9"
+    "knex": "^0.16.3",
+    "nodemon": "^1.18.9",
+    "pg": "^7.8.1"
   },
   "devDependencies": {
     "node-fetch": "^2.3.0"

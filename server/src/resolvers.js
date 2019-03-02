@@ -1,5 +1,8 @@
 const fetch = require('node-fetch');
 require('dotenv/config');
+const environment = process.env.NODE_ENV || 'development';
+const configuration = require('../knexfile')[environment];
+const database = require('knex')(configuration);
 
 module.exports = {
   Query: {
@@ -44,6 +47,31 @@ module.exports = {
       } catch (error) {
         console.error(error);
       }
+    },
+    users: async () => {
+      try {
+        const users = await database('users').select();
+        return users;
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    me: async (_, { userId }) => {
+      const user = await database('users')
+        .where('id', userId)
+        .select();
+      let movies = await database('content').where('contentID', userId);
+      const moviesData = movies.map(async movie => {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/movie/${movie.movieID}?api_key=${
+            process.env.API_KEY
+          }&language=en-US`
+        );
+        return await response.json();
+      });
+      movies = await Promise.all(moviesData);
+      const result = { ...user[0], movies };
+      return result;
     }
   },
   Movie: {
