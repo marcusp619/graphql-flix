@@ -4,6 +4,10 @@ module.exports = {
       dataSources.movieAPI.getPopularMovies(),
     movie: async (_, { movieId }, { dataSources }) =>
       dataSources.movieAPI.getAMovieById({ movieId })
+  },
+  Movie: {
+    videos: async (parent, __, { dataSources }) =>
+      dataSources.videoAPI.getVideosById(parent.id)
   }
 };
 

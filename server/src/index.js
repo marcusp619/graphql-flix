@@ -4,7 +4,7 @@ const typeDefs = require("./schema");
 const resolvers = require("./resolvers");
 
 const MovieAPI = require("./datasources/movie");
-
+const VideoAPI = require("./datasources/video");
 const PORT = 4000;
 
 const app = express();
@@ -13,7 +13,8 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   dataSources: () => ({
-    movieAPI: new MovieAPI()
+    movieAPI: new MovieAPI(),
+    videoAPI: new VideoAPI()
   })
 });
 
