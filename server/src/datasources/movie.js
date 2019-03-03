@@ -2,6 +2,7 @@ const { RESTDataSource } = require("apollo-datasource-rest");
 const environment = process.env.NODE_ENV || "development";
 const configuration = require("../knexfile")[environment];
 const database = require("knex")(configuration);
+require("dotenv").config();
 
 /* The RESTDataSource sets up and in-memory cache that caches responses 
 from our REST resources with no additional setup. */
@@ -22,12 +23,12 @@ class MovieAPI extends RESTDataSource {
       : [];
   }
 
-  async getAMovie() {
+  async getAMovieById() {
     const response = await this.get(
       `${movieId}?api_key=${process.env.API_KEY}&language=en-US`
     );
 
-    return this.moviesReducer(response[0]);
+    return this.moviesReducer(response);
   }
 
   moviesReducer(movie) {
