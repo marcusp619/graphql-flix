@@ -1,7 +1,9 @@
 module.exports = {
   Query: {
     movies: async (_, __, { dataSources }) =>
-      dataSources.movieAPI.getPopularMovies()
+      dataSources.movieAPI.getPopularMovies(),
+    movie: async (_, { movieId }, { dataSources }) =>
+      dataSources.movieAPI.getAMovieById({ movieId })
   }
 };
 

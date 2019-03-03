@@ -23,7 +23,7 @@ class MovieAPI extends RESTDataSource {
       : [];
   }
 
-  async getAMovieById(movieId) {
+  async getAMovieById({ movieId }) {
     const response = await this.get(
       `${movieId}?api_key=${process.env.API_KEY}&language=en-US`
     );
