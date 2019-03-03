@@ -18,8 +18,28 @@ class MovieAPI extends RESTDataSource {
     );
 
     return Array.isArray(response)
-      ? response.map(movie => this.movieReducer(movie))
+      ? response.map(movie => this.moviesReducer(movie))
       : [];
+  }
+
+  moviesReducer(movie) {
+    return {
+      poster_path: movie.poster_path,
+      adult: movie.adult,
+      overview: movie.overview,
+      release_date: movie.release_date,
+      genre_ids: movie.genre_ids,
+      genres: movie.genres,
+      id: movie.id,
+      original_title: movie.original_title,
+      original_language: movie.original_language,
+      title: movie.title,
+      backdrop_path: movie.backdrop_path,
+      popularity: movie.popularity,
+      vote_count: movie.vote_count,
+      duration: movie.duration,
+      videos: movie.videos
+    };
   }
 }
 
