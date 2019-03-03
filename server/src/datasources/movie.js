@@ -22,6 +22,14 @@ class MovieAPI extends RESTDataSource {
       : [];
   }
 
+  async getAMovie() {
+    const response = await this.get(
+      `${movieId}?api_key=${process.env.API_KEY}&language=en-US`
+    );
+
+    return this.moviesReducer(response[0]);
+  }
+
   moviesReducer(movie) {
     return {
       poster_path: movie.poster_path,
