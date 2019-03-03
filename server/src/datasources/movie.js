@@ -1,6 +1,6 @@
 const { RESTDataSource } = require("apollo-datasource-rest");
 const environment = process.env.NODE_ENV || "development";
-const configuration = require("../knexfile")[environment];
+const configuration = require("../../knexfile")[environment];
 const database = require("knex")(configuration);
 require("dotenv").config();
 
@@ -18,8 +18,8 @@ class MovieAPI extends RESTDataSource {
       `popular?api_key=${process.env.API_KEY}&language=en-US&page=1`
     );
 
-    return Array.isArray(response)
-      ? response.map(movie => this.moviesReducer(movie))
+    return response.hasOwnProperty("results")
+      ? response.results.map(movie => this.moviesReducer(movie))
       : [];
   }
 

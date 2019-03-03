@@ -1,6 +1,7 @@
 const express = require("express");
 const { ApolloServer } = require("apollo-server-express");
 const typeDefs = require("./schema");
+const resolvers = require("./resolvers");
 
 const MovieAPI = require("./datasources/movie");
 
@@ -10,9 +11,10 @@ const app = express();
 
 const server = new ApolloServer({
   typeDefs,
-  dataSources: () => {
-    movieAPI: new MovieAPI();
-  }
+  resolvers,
+  dataSources: () => ({
+    movieAPI: new MovieAPI()
+  })
 });
 
 server.applyMiddleware({ app });
