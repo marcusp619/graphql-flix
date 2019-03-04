@@ -14,6 +14,7 @@ class VideoAPI extends RESTDataSource {
     const response = await this.get(
       `movie/${videoId}/videos?api_key=${process.env.API_KEY}&language=en-US`
     );
+
     return response.results.map(video => this.videoReducer(video));
   }
 
@@ -21,6 +22,7 @@ class VideoAPI extends RESTDataSource {
     const response = await this.get(
       `tv/${videoId}/videos?api_key=${process.env.API_KEY}&language=en-US`
     );
+
     return response.results.map(video => this.videoReducer(video));
   }
 
