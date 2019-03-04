@@ -29,7 +29,6 @@ class MovieAPI extends RESTDataSource {
   }
 
   getGenres(genreIds) {
-    console.log(genreIds);
     const conversionSet = {
       28: " Action ",
       12: " Adventure ",

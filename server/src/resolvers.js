@@ -11,7 +11,7 @@ module.exports = {
     videos: async (parent, __, { dataSources }) =>
       dataSources.videoAPI.getMovieVideosById(parent.id),
     genres: (parent, __, { dataSources }) =>
-      dataSources.movieAPI.getGenres(parent.genere_ids)
+      dataSources.movieAPI.getGenres(parent.genre_ids)
   },
   TV: {
     videos: async (parent, __, { dataSources }) =>
