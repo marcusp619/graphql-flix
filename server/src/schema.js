@@ -9,7 +9,6 @@ const typeDefs = gql`
     movie(movieId: ID!): Movie!
     shows: [TV]
     videos: [Video]
-    users: [User]
     me: User
   }
 
