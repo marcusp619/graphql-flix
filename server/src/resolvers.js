@@ -24,17 +24,34 @@ module.exports = {
     },
     addMovie: async (_, { movieId }, { dataSources }) => {
       const result = await dataSources.userAPI.addMovie({ movieId });
+      const movie = await dataSources.movieAPI.getAMovieById({ movieId });
 
       return {
         success: true,
         message: result[0].hasOwnProperty("movieID")
           ? "Movie added successfully"
           : `the following movie couldn't be added: ${movieId}`,
-        movie: result[0]
+        movie
       };
     },
-    removeMovie: async (_, { movieId }, { dataSources }) =>
-      dataSources.userAPI.removeMovie({ movieId })
+    removeMovie: async (_, { movieId }, { dataSources }) => {
+      const result = dataSources.userAPI.removeMovie({ movieId });
+
+      if (!result) {
+        return {
+          success: false,
+          message: "failed to remove movie"
+        };
+      }
+
+      const movie = await dataSources.movieAPI.getAMovieById({ movieId });
+
+      return {
+        success: true,
+        message: "movie removed",
+        movie
+      };
+    }
   }
 };
 

@@ -62,7 +62,8 @@ class UserAPI extends DataSource {
         contentID: id
       })
       .del();
-    console.log(response);
+
+    return response;
   }
 }
 

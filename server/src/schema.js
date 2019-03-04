@@ -16,6 +16,7 @@ const typeDefs = gql`
   type Mutation {
     login(email: String): String
     addMovie(movieId: ID!): MovieUpdateResponse!
+    removeMovie(movieId: ID!): MovieUpdateResponse!
   }
 
   # "MovieType"
