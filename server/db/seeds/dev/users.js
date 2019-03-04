@@ -11,8 +11,8 @@ exports.seed = function(knex, Promise) {
           .insert({ email: "myfakeemail@email.com" }, "id")
           .then(user => {
             return knex("content").insert([
-              { title: "Alita: Battle Angel", contentID: user[0] },
-              { title: "Green Book", contentID: user[0] }
+              { contentID: user[0], movieID: "399579" },
+              { contentID: user[0], movieID: "490132" }
             ]);
           })
           .then(() => console.log("Seeding complete!"))
