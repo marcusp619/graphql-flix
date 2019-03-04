@@ -7,12 +7,19 @@ from our REST resources with no additional setup. */
 class VideoAPI extends RESTDataSource {
   constructor() {
     super();
-    this.baseURL = "https://api.themoviedb.org/3/movie/";
+    this.baseURL = "https://api.themoviedb.org/3/";
   }
 
-  async getVideosById(videoId) {
+  async getMovieVideosById(videoId) {
     const response = await this.get(
-      `${videoId}/videos?api_key=${process.env.API_KEY}&language=en-US`
+      `movie/${videoId}/videos?api_key=${process.env.API_KEY}&language=en-US`
+    );
+    return response.results.map(video => this.videoReducer(video));
+  }
+
+  async getShowVideosById(videoId) {
+    const response = await this.get(
+      `tv/${videoId}/videos?api_key=${process.env.API_KEY}&language=en-US`
     );
     return response.results.map(video => this.videoReducer(video));
   }

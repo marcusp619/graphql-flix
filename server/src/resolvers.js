@@ -3,11 +3,19 @@ module.exports = {
     movies: async (_, __, { dataSources }) =>
       dataSources.movieAPI.getPopularMovies(),
     movie: async (_, { movieId }, { dataSources }) =>
-      dataSources.movieAPI.getAMovieById({ movieId })
+      dataSources.movieAPI.getAMovieById({ movieId }),
+    shows: async (_, __, { dataSources }) =>
+      dataSources.tvAPI.getPopularTVShows()
   },
   Movie: {
     videos: async (parent, __, { dataSources }) =>
-      dataSources.videoAPI.getVideosById(parent.id)
+      dataSources.videoAPI.getMovieVideosById(parent.id)
+    // genres: (parent, __, { dataSources }) =>
+    //   dataSources.movieAPI.getGenres(parent.genere_ids)
+  },
+  TV: {
+    videos: async (parent, __, { dataSources }) =>
+      dataSources.videoAPI.getShowVideosById(parent.id)
   }
 };
 

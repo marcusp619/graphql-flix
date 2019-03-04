@@ -7,7 +7,7 @@ const typeDefs = gql`
   type Query {
     movies: [Movie]
     movie(movieId: ID!): Movie!
-    tv: [TV]
+    shows: [TV]
     videos: [Video]
     users: [User]
     me(userId: ID!): User

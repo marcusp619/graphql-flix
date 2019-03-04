@@ -5,6 +5,7 @@ const resolvers = require("./resolvers");
 
 const MovieAPI = require("./datasources/movie");
 const VideoAPI = require("./datasources/video");
+const TVAPI = require("./datasources/tv");
 const PORT = 4000;
 
 const app = express();
@@ -14,7 +15,8 @@ const server = new ApolloServer({
   resolvers,
   dataSources: () => ({
     movieAPI: new MovieAPI(),
-    videoAPI: new VideoAPI()
+    videoAPI: new VideoAPI(),
+    tvAPI: new TVAPI()
   })
 });
 
