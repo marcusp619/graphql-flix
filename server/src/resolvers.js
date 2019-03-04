@@ -23,7 +23,17 @@ module.exports = {
       if (user) return Buffer.from(email).toString("base64");
     },
     addMovie: async (_, { movieId }, { dataSources }) => {
-      dataSources.userAPI.addMovie({ movieId });
+      const result = await dataSources.userAPI.addMovie({ movieId });
+      console.log(result[0]);
+
+      return {
+        success: true,
+        message:
+          result[0].hasOwnProperty("movieID") === movieId
+            ? "Movie added successfully"
+            : `the following movie couldn't be added: ${movieId}`,
+        movie: result[0]
+      };
     }
   }
 };

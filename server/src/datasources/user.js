@@ -44,10 +44,14 @@ class UserAPI extends DataSource {
 
   async addMovie({ movieId }) {
     const { id } = this.context.user;
-    const response = await this.store("content").insert({
-      contentID: id,
-      movieID: movieId
-    });
+    const response = await this.store("content").insert(
+      {
+        contentID: id,
+        movieID: movieId
+      },
+      "*"
+    );
+    return response;
   }
 }
 
