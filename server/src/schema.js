@@ -15,7 +15,7 @@ const typeDefs = gql`
 
   # The "Mutation" type is the root of all GraphQL creations, deletions and updates
   type Mutation {
-    login(email: String): LoginResponse!
+    login(email: String): String
   }
 
   # "MovieType"

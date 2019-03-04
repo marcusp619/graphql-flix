@@ -25,21 +25,21 @@ class UserAPI extends DataSource {
   async findOrCreateUser({ email: emailArg } = {}) {
     const email =
       this.context && this.context.user ? this.context.user.email : emailArg;
+    let newUser = null;
 
     if (!email || !isEmail.validate(email)) return null;
 
-    console.log(this.context);
     const user = await this.store("users")
       .where("email", email)
       .select();
-    if (Object.keys(user).length === 0) {
-      // console.log(email);
-      const newUser = await this.store("users").insert({ email }, "id");
-      // console.log(newUser);
+
+    if (Object.keys(user).length < 1) {
+      newUser = await this.store("users").insert({ email }, "*");
+    } else {
+      return user[0];
     }
 
-    // const users = await this.store.users.findOrCreate({ where: { email } });
-    // return users && users[0] ? users[0] : null;
+    return newUser && newUser[0] ? newUser[0] : null;
   }
 
   async addMovies({ movieIds }) {
