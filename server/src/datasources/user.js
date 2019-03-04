@@ -57,12 +57,8 @@ class UserAPI extends DataSource {
     return results;
   }
 
-  async addMovie(movieId) {
-    const userId = this.context.user.id;
-    const res = await this.store.movies.findOrCreate({
-      where: { userId, movieId }
-    });
-    return res && res.length ? res[0].get() : false;
+  async addMovie({ movieId }) {
+    console.log(this.context);
   }
 
   async deleteMovies({ movieId }) {

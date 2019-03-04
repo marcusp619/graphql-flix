@@ -32,7 +32,10 @@ const context = async ({ req }) => {
 
   if (findUser.length === 0) {
     user = await this.store("users").insert({ email }, "id, email");
+    return { user: user[0] };
   }
+
+  return { user: findUser[0] };
 };
 
 const server = new ApolloServer({
