@@ -10,13 +10,12 @@ const typeDefs = gql`
     shows: [TV]
     videos: [Video]
     users: [User]
-    me(userId: ID!): User
+    me: User
   }
 
   # The "Mutation" type is the root of all GraphQL creations, deletions and updates
   type Mutation {
     login(email: String): LoginResponse!
-    newUser(username: String!, email: String!): LoginResponse!
   }
 
   # "MovieType"
@@ -71,9 +70,8 @@ const typeDefs = gql`
   #"UserType"
   type User {
     id: ID!
-    UserName: String!
-    UserEmail: String!
-    movies: [Movie]
+    email: String!
+    movies: [Movie]!
   }
 
   type LoginResponse {

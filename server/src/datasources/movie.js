@@ -1,7 +1,4 @@
 const { RESTDataSource } = require("apollo-datasource-rest");
-const environment = process.env.NODE_ENV || "development";
-const configuration = require("../../knexfile")[environment];
-const database = require("knex")(configuration);
 require("dotenv").config();
 
 /* The RESTDataSource sets up and in-memory cache that caches responses 
