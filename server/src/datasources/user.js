@@ -53,6 +53,17 @@ class UserAPI extends DataSource {
     );
     return response;
   }
+
+  async removeMovie({ movieId }) {
+    const { id } = this.context.user;
+    const response = await this.store("content")
+      .where({
+        movieID: movieId,
+        contentID: id
+      })
+      .del();
+    console.log(response);
+  }
 }
 
 module.exports = UserAPI;

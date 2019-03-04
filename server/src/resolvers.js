@@ -24,14 +24,12 @@ module.exports = {
     },
     addMovie: async (_, { movieId }, { dataSources }) => {
       const result = await dataSources.userAPI.addMovie({ movieId });
-      console.log(result[0]);
 
       return {
         success: true,
-        message:
-          result[0].hasOwnProperty("movieID") === movieId
-            ? "Movie added successfully"
-            : `the following movie couldn't be added: ${movieId}`,
+        message: result[0].hasOwnProperty("movieID")
+          ? "Movie added successfully"
+          : `the following movie couldn't be added: ${movieId}`,
         movie: result[0]
       };
     }
