@@ -32,7 +32,9 @@ module.exports = {
           : `the following movie couldn't be added: ${movieId}`,
         movie: result[0]
       };
-    }
+    },
+    removeMovie: async (_, { movieId }, { dataSources }) =>
+      dataSources.userAPI.removeMovie({ movieId })
   }
 };
 
