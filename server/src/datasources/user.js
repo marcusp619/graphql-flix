@@ -42,39 +42,12 @@ class UserAPI extends DataSource {
     return newUser && newUser[0] ? newUser[0] : null;
   }
 
-  async addMovies({ movieIds }) {
-    const userId = this.context.user.id;
-    if (!userId) return;
-
-    let results = [];
-
-    // for each movie id, try to add the movie and add it to the results array
-    // if successful
-    for (const movieId of movieIds) {
-      const res = await this.addMovie(movieId);
-      if (res) results.push(res);
-    }
-    return results;
-  }
-
   async addMovie({ movieId }) {
-    console.log(this.context);
-  }
-
-  async deleteMovies({ movieId }) {
-    const userId = this.context.user.id;
-
-    return !!this.store.movies.destroy({ where: { userId, movieId } });
-  }
-
-  async getMovieIdsByUser() {
-    const userId = this.context.user.id;
-    const found = await this.store.movies.findAll({
-      where: { userId }
+    const { id } = this.context.user;
+    const response = await this.store("content").insert({
+      contentID: id,
+      movieID: movieId
     });
-    return found && found.length
-      ? found.map(l => l.dataValues.movieId).filter(l => !!l)
-      : [];
   }
 }
 

@@ -78,6 +78,12 @@ const typeDefs = gql`
     sucess: Boolean!
     message: String
   }
+
+  type MovieUpdateResponse {
+    success: Boolean!
+    message: String
+    movies: [Movie]
+  }
 `;
 
 module.exports = typeDefs;
