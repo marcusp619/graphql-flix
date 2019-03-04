@@ -12,35 +12,41 @@ const PORT = 4000;
 const app = express();
 
 const environment = process.env.NODE_ENV || "development";
-const configuration = require("../../knexfile")[environment];
+const configuration = require("../knexfile")[environment];
 const database = require("knex")(configuration);
 const store = database;
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context,
   dataSources: () => ({
     movieAPI: new MovieAPI(),
     videoAPI: new VideoAPI(),
     tvAPI: new TVAPI(),
-    user: new UserAPI({ store })
+    userAPI: new UserAPI(store)
   })
 });
 
-// // the function that sets up the global context for each resolver, using the req
-// const context = async ({ req }) => {
-//   // simple auth check on every request
-//   const auth = (req.headers && req.headers.authorization) || '';
-//   const email = new Buffer(auth, 'base64').toString('ascii');
+// the function that sets up the global context for each resolver, using the req
+const context = async ({ req }) => {
+  // simple auth check on every request
+  const auth = (req.headers && req.headers.authorization) || "";
+  const email = new Buffer(auth, "base64").toString("ascii");
+  let user;
+  // if the email isn't formatted validly, return null for user
+  if (!isEmail.validate(email)) return { user: null };
+  // find a user by their email
+  const findUser = await store("users")
+    .where("email", email)
+    .select();
 
-//   // if the email isn't formatted validly, return null for user
-//   if (!isEmail.validate(email)) return { user: null };
-//   // find a user by their email
-//   const users = await store.users.findOrCreate({ where: { email } });
-//   const user = users && users[0] ? users[0] : null;
-
-//   return { user: { ...user.dataValues } };
-// };
+  if (findUser.length === 0) {
+    user = await this.store("users").insert({ email }, "*");
+  }
+  console.log(user);
+  return user;
+};
 
 server.applyMiddleware({ app });
 

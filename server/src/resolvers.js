@@ -9,13 +9,19 @@ module.exports = {
   },
   Movie: {
     videos: async (parent, __, { dataSources }) =>
-      dataSources.videoAPI.getMovieVideosById(parent.id)
-    // genres: (parent, __, { dataSources }) =>
-    //   dataSources.movieAPI.getGenres(parent.genere_ids)
+      dataSources.videoAPI.getMovieVideosById(parent.id),
+    genres: (parent, __, { dataSources }) =>
+      dataSources.movieAPI.getGenres(parent.genere_ids)
   },
   TV: {
     videos: async (parent, __, { dataSources }) =>
       dataSources.videoAPI.getShowVideosById(parent.id)
+  },
+  Mutation: {
+    login: async (_, { email }, { dataSources }) => {
+      const user = await dataSources.userAPI.findOrCreateUser({ email });
+      if (user) return new Buffer(email).toString("base64");
+    }
   }
 };
 

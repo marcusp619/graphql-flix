@@ -2,7 +2,7 @@ const { DataSource } = require("apollo-datasource");
 const isEmail = require("isemail");
 
 class UserAPI extends DataSource {
-  constructor({ store }) {
+  constructor(store) {
     super();
     this.store = store;
   }
@@ -25,10 +25,21 @@ class UserAPI extends DataSource {
   async findOrCreateUser({ email: emailArg } = {}) {
     const email =
       this.context && this.context.user ? this.context.user.email : emailArg;
+
     if (!email || !isEmail.validate(email)) return null;
 
-    const users = await this.store.users.findOrCreate({ where: { email } });
-    return users && users[0] ? users[0] : null;
+    console.log(this.context);
+    const user = await this.store("users")
+      .where("email", email)
+      .select();
+    if (Object.keys(user).length === 0) {
+      // console.log(email);
+      const newUser = await this.store("users").insert({ email }, "id");
+      // console.log(newUser);
+    }
+
+    // const users = await this.store.users.findOrCreate({ where: { email } });
+    // return users && users[0] ? users[0] : null;
   }
 
   async addMovies({ movieIds }) {
