@@ -20,12 +20,18 @@ class MovieAPI extends RESTDataSource {
       : [];
   }
 
-  async getAMovieById({ movieId }) {
+  async getAMovieById(movieID) {
     const response = await this.get(
-      `${movieId}?api_key=${process.env.API_KEY}&language=en-US`
+      `${movieID}?api_key=${process.env.API_KEY}&language=en-US`
     );
 
     return this.moviesReducer(response);
+  }
+
+  async getMoviesByIds({ movieIds }) {
+    return Promise.all(
+      movieIds.map(movie => this.getAMovieById(movie.movieID))
+    );
   }
 
   getGenres(genreIds) {

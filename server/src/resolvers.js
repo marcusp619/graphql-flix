@@ -5,7 +5,8 @@ module.exports = {
     movie: async (_, { movieId }, { dataSources }) =>
       dataSources.movieAPI.getAMovieById({ movieId }),
     shows: async (_, __, { dataSources }) =>
-      dataSources.tvAPI.getPopularTVShows()
+      dataSources.tvAPI.getPopularTVShows(),
+    me: async (_, __, { dataSources }) => dataSources.userAPI.findOrCreateUser()
   },
   Movie: {
     videos: async (parent, __, { dataSources }) =>
@@ -51,6 +52,21 @@ module.exports = {
         message: "movie removed",
         movie
       };
+    }
+  },
+  User: {
+    movies: async (_, __, { dataSources }) => {
+      // get ids of launches by user
+      const movieIds = await dataSources.userAPI.getMovieIdsByUser();
+
+      if (!movieIds.length) return [];
+
+      // look up those launches by their ids
+      return (
+        dataSources.movieAPI.getMoviesByIds({
+          movieIds
+        }) || []
+      );
     }
   }
 };

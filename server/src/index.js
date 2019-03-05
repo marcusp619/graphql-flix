@@ -31,7 +31,7 @@ const context = async ({ req }) => {
     .select();
 
   if (findUser.length === 0) {
-    user = await this.store("users").insert({ email }, "id, email");
+    user = await this.store("users").insert({ email }, "email");
     return { user: user[0] };
   }
 

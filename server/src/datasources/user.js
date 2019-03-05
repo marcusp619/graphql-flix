@@ -65,6 +65,15 @@ class UserAPI extends DataSource {
 
     return response;
   }
+
+  async getMovieIdsByUser() {
+    const { id } = this.context.user;
+    const movieIds = await this.store("content")
+      .where("contentID", id)
+      .select("movieID");
+
+    return movieIds;
+  }
 }
 
 module.exports = UserAPI;
