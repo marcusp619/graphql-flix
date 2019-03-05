@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server');
+const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
   # Comments in GraphQL are defined with the hash (#) symbol.
@@ -7,16 +7,16 @@ const typeDefs = gql`
   type Query {
     movies: [Movie]
     movie(movieId: ID!): Movie!
-    tv: [TV]
+    shows: [TV]
     videos: [Video]
-    users: [User]
-    me(userId: ID!): User
+    me: User
   }
 
   # The "Mutation" type is the root of all GraphQL creations, deletions and updates
   type Mutation {
-    login(email: String): LoginResponse!
-    newUser(username: String!, email: String!): LoginResponse!
+    login(email: String): String
+    addMovie(movieId: ID!): MovieUpdateResponse!
+    removeMovie(movieId: ID!): MovieUpdateResponse!
   }
 
   # "MovieType"
@@ -71,14 +71,19 @@ const typeDefs = gql`
   #"UserType"
   type User {
     id: ID!
-    UserName: String!
-    UserEmail: String!
-    movies: [Movie]
+    email: String!
+    movies: [Movie]!
   }
 
   type LoginResponse {
     sucess: Boolean!
     message: String
+  }
+
+  type MovieUpdateResponse {
+    success: Boolean!
+    message: String
+    movie: Movie
   }
 `;
 

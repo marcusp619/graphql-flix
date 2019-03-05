@@ -12,18 +12,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "apollo-server": "^2.4.0",
+    "apollo-datasource-rest": "^0.3.2",
     "apollo-server-express": "^2.4.8",
     "apollo-server-testing": "^2.4.0",
     "dotenv": "^6.2.0",
+    "express": "^4.16.4",
     "graphql": "^14.1.1",
-    "graphql-tools": "^4.0.4",
     "isemail": "^3.2.0",
     "knex": "^0.16.3",
     "nodemon": "^1.18.9",
     "pg": "^7.8.1"
-  },
-  "devDependencies": {
-    "node-fetch": "^2.3.0"
   }
 }
