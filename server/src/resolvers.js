@@ -56,12 +56,10 @@ module.exports = {
   },
   User: {
     movies: async (_, __, { dataSources }) => {
-      // get ids of launches by user
       const movieIds = await dataSources.userAPI.getMovieIdsByUser();
 
       if (!movieIds.length) return [];
 
-      // look up those launches by their ids
       return (
         dataSources.movieAPI.getMoviesByIds({
           movieIds
